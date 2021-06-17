@@ -3,27 +3,85 @@
   margin: 0;
   box-sizing: border-box;
   list-style: none;
+  font-family: "Roboto", sans-serif;
+}
+
+.container {
+  height: 100vh;
 }
 
 .converter {
-  position: relative;
   width: 50%;
+  max-width: 400px;
   margin: auto;
-  background-color: #f6fcff;
+  position: relative;
+  margin-top: 5rem;
 }
 
-.converter-header h2 {
+.converter-body,
+.converter-header {
+  width: 100%;
+  max-width: 400px;
+  left: 40px;
+}
+
+.converter-body {
+  display: flex;
+  flex-direction: column;
+  background-color: #f3faff;
+  padding: 10px;
+}
+
+h2 {
   font-size: 2rem;
   margin-bottom: 1.8rem;
 }
 
-.converter-header h4 {
+h4,
+p {
   margin-bottom: 1rem;
 }
 
-.converter-header p {
-  margin-bottom: 1rem;
+.item {
+  margin-bottom: 6px;
 }
+
+.item-wrapper {
+  display: block;
+  width: 100%;
+}
+
+.item-info {
+  display: flex;
+  align-items: center;
+  line-height: 1.5rem;
+}
+
+.item-info > span {
+  margin-right: 10px;
+  font-weight: 700;
+}
+
+.item-value {
+  width: 100%;
+  max-width: 400px;
+  height: 30px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #bbbaba;
+  border-radius: 2px;
+}
+
+.item-name-ru {
+  display: block;
+  text-align: right;
+  margin-top: 2px;
+  font-size: 0.6rem;
+  color: #9f9f9f;
+}
+
+/* dropdown */
 
 .add-inputs {
   margin-top: 1rem;
@@ -31,33 +89,38 @@
 }
 
 .drop {
+  width: 400px;
+  height: 200px;
   display: none;
   position: absolute;
   width: 100%;
-  background-color: #ffe6e6;
+  background-color: #fff8ed;
   box-shadow: 0 0.5rem 1rem #bbbaba;
-  overflow-y: scroll;
-}
-
-.drop li {
-  border-bottom: 1px solid #e0c9c9;
-}
-
-.drop li:hover {
-  background-color: #ffb9b9;
-}
-
-.drop.active {
-  display: block;
-  top: 150%;
-}
-
-.menu {
-  display: inline-block;
-  cursor: pointer;
+  /* overflow-y: scroll; */
 }
 
 li {
   cursor: pointer;
-  padding: 5px 0px;
+  padding: 10px;
+  border-bottom: 1px solid #ece4d8;
+}
+
+li:hover {
+  background-color: #ffedd0;
+}
+
+.drop.active {
+  display: block;
+  top: 160%;
+}
+
+.menu {
+  display: inline-block;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #166498;
+}
+
+.menu:hover {
+  color: #ff9d00;
 }

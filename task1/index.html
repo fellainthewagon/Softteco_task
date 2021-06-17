@@ -5,11 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
     <title>Currency Converter</title>
   </head>
 
   <body>
-    <section>
+    <section class="container">
       <div class="converter">
         <div class="converter-header">
           <h2>Конвертер валют</h2>
@@ -22,72 +27,64 @@
         </div>
 
         <div class="converter-body">
-          <div class="inputs">
-            <div class="input" data-cur="usd">
-              <div class="input-wrapper">
-                <div class="input-info">
-                  <span>
-                    <a href="#">USD</a>
-                  </span>
+          <div class="items">
+            <div class="item" data-cur="usd">
+              <div class="item-wrapper">
+                <div class="item-info">
+                  <span>USD</span>
                   <input
-                    class="input-value"
+                    class="item-value"
                     type="tel"
                     inputmode="decimal"
                     value="1"
                   />
                 </div>
-                <div class="input-name-ru">доллар США</div>
+                <div class="item-name-ru">доллар США</div>
               </div>
             </div>
 
-            <div class="input" data-cur="eur">
-              <div class="input-wrapper">
-                <div class="input-info">
-                  <span>
-                    <a href="#">EUR</a>
-                  </span>
+            <div class="item" data-cur="eur">
+              <div class="item-wrapper">
+                <div class="item-info">
+                  <span>EUR</span>
                   <input
-                    class="input-value"
+                    class="item-value"
                     type="tel"
                     inputmode="decimal"
                     value="0.82"
                   />
                 </div>
-                <div class="input-name-ru">евро</div>
+                <div class="item-name-ru">евро</div>
               </div>
             </div>
 
-            <div class="input" data-cur="byn">
-              <div class="input-wrapper">
-                <div class="input-info">
-                  <span>
-                    <a href="#">BYN</a>
-                  </span>
+            <div class="item" data-cur="byn">
+              <div class="item-wrapper">
+                <div class="item-info">
+                  <span>BYN</span>
                   <input
-                    class="input-value"
+                    class="item-value"
                     type="tel"
                     inputmode="decimal"
                     value="2.5"
                   />
                 </div>
-                <div class="input-name-ru">белорусский рубль</div>
+                <div class="item-name-ru">белорусский рубль</div>
               </div>
             </div>
 
-            <div class="input" data-cur="rub">
-              <div class="input-wrapper">
-                <div class="input-info">
-                  <span>
-                    <a href="#">RUB</a>
-                  </span>
+            <div class="item" data-cur="rub">
+              <div class="item-wrapper">
+                <div class="item-info">
+                  <span>RUB</span>
                   <input
-                    class="input-value"
+                    class="item-value"
                     type="tel"
                     inputmode="decimal"
                     value="73"
                   />
                 </div>
-                <div class="input-name-ru">российский рубль</div>
+                <div class="item-name-ru">российский рубль</div>
               </div>
             </div>
           </div>
@@ -102,8 +99,8 @@
                 </div> -->
             <div class="add-inputs">
               <span class="menu">(+) Добавить валюту</span>
-              <div class="drop" style="width: 300px; height: 200px">
-                <ul>
+              <div class="drop">
+                <ul class="list">
                   <li>
                     <span>
                       <span>AUD</span>
