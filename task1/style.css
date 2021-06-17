@@ -1,0 +1,63 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+.converter {
+  position: relative;
+  width: 50%;
+  margin: auto;
+  background-color: #f6fcff;
+}
+
+.converter-header h2 {
+  font-size: 2rem;
+  margin-bottom: 1.8rem;
+}
+
+.converter-header h4 {
+  margin-bottom: 1rem;
+}
+
+.converter-header p {
+  margin-bottom: 1rem;
+}
+
+.add-inputs {
+  margin-top: 1rem;
+  position: relative;
+}
+
+.drop {
+  display: none;
+  position: absolute;
+  width: 100%;
+  background-color: #ffe6e6;
+  box-shadow: 0 0.5rem 1rem #bbbaba;
+  overflow-y: scroll;
+}
+
+.drop li {
+  border-bottom: 1px solid #e0c9c9;
+}
+
+.drop li:hover {
+  background-color: #ffb9b9;
+}
+
+.drop.active {
+  display: block;
+  top: 150%;
+}
+
+.menu {
+  display: inline-block;
+  cursor: pointer;
+}
+
+li {
+  cursor: pointer;
+  padding: 5px 0px;
+}

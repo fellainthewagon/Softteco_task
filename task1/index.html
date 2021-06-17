@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Currency Converter</title>
+  </head>
+
+  <body>
+    <section>
+      <div class="converter">
+        <div class="converter-header">
+          <h2>Конвертер валют</h2>
+          <h4>По курсу НБ РБ</h4>
+          <p>
+            Официальный курс устанавливаемый<br />
+            Национальным банком Республики Беларусь<br />
+            на <span>17.06.2021</span>
+          </p>
+        </div>
+
+        <div class="converter-body">
+          <div class="inputs">
+            <div class="input" data-cur="usd">
+              <div class="input-wrapper">
+                <div class="input-info">
+                  <span>
+                    <a href="#">USD</a>
+                  </span>
+                  <input
+                    class="input-value"
+                    type="tel"
+                    inputmode="decimal"
+                    value="1"
+                  />
+                </div>
+                <div class="input-name-ru">доллар США</div>
+              </div>
+            </div>
+
+            <div class="input" data-cur="eur">
+              <div class="input-wrapper">
+                <div class="input-info">
+                  <span>
+                    <a href="#">EUR</a>
+                  </span>
+                  <input
+                    class="input-value"
+                    type="tel"
+                    inputmode="decimal"
+                    value="0.82"
+                  />
+                </div>
+                <div class="input-name-ru">евро</div>
+              </div>
+            </div>
+
+            <div class="input" data-cur="byn">
+              <div class="input-wrapper">
+                <div class="input-info">
+                  <span>
+                    <a href="#">BYN</a>
+                  </span>
+                  <input
+                    class="input-value"
+                    type="tel"
+                    inputmode="decimal"
+                    value="2.5"
+                  />
+                </div>
+                <div class="input-name-ru">белорусский рубль</div>
+              </div>
+            </div>
+
+            <div class="input" data-cur="rub">
+              <div class="input-wrapper">
+                <div class="input-info">
+                  <span>
+                    <a href="#">RUB</a>
+                  </span>
+                  <input
+                    class="input-value"
+                    type="tel"
+                    inputmode="decimal"
+                    value="73"
+                  />
+                </div>
+                <div class="input-name-ru">российский рубль</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="add">
+            <!-- <div class="options">
+                  <select class="selectRate" name="nbrb" tabindex="-1">
+                    <option value="aud">AUD австралийский доллар</option>
+                    <option value="bgn">BGN болгарский лев</option>
+                    <option value="cad">CAD канадский доллар</option>
+                  </select>
+                </div> -->
+            <div class="add-inputs">
+              <span class="menu">(+) Добавить валюту</span>
+              <div class="drop" style="width: 300px; height: 200px">
+                <ul>
+                  <li>
+                    <span>
+                      <span>AUD</span>
+                      австралийский доллар
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <span>BGN</span>
+                      болгарский лев
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <span>CAD</span>
+                      канадский доллар
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <span>AUD</span>
+                      австралийский доллар
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <span>BGN</span>
+                      болгарский лев
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <span>CAD</span>
+                      канадский доллар
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <span>AUD</span>
+                      австралийский доллар
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <span>BGN</span>
+                      болгарский лев
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <span>CAD</span>
+                      канадский доллар
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <span>AUD</span>
+                      австралийский доллар
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <span>BGN</span>
+                      болгарский лев
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <span>CAD</span>
+                      канадский доллар
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <span>AUD</span>
+                      австралийский доллар
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <span>BGN</span>
+                      болгарский лев
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      <span>CAD</span>
+                      канадский доллар
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- script frontend -->
+    <script src="./script.js"></script>
+  </body>
+</html>
