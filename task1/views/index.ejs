@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Currency Converter</title>
+  </head>
+
+  <body>
+    <section class="container">
+      <div class="converter">
+        <div class="converter-header">
+          <h2>Конвертер валют</h2>
+          <h4>По курсу НБ РБ</h4>
+          <p>
+            Официальный курс устанавливаемый<br />
+            Национальным банком Республики Беларусь<br />
+            на <span>17.06.2021</span>
+          </p>
+        </div>
+
+        <div class="converter-body">
+          <div class="items">
+            <!-- USD -->
+            <div
+              class="item"
+              data-cur="<%= currencies[23][0].toLowerCase() %>"
+              style="display: block"
+            >
+              <div class="item-wrapper">
+                <div class="item-info">
+                  <span><%= currencies[23][0] %></span>
+                  <input
+                    class="item-value"
+                    type="tel"
+                    inputmode="decimal"
+                    value="<%= currencies[23][1].toFixed(4) %>"
+                  />
+                  <span class="close"></span>
+                </div>
+                <div class="item-name-ru"><%= currencies[23][2] %></div>
+              </div>
+            </div>
+            <!-- EUR -->
+            <div
+              class="item"
+              data-cur="<%= currencies[8][0].toLowerCase() %>"
+              style="display: block"
+            >
+              <div class="item-wrapper">
+                <div class="item-info">
+                  <span><%= currencies[8][0] %></span>
+                  <input
+                    class="item-value"
+                    type="tel"
+                    inputmode="decimal"
+                    value="<%= currencies[8][1].toFixed(4) %>"
+                  />
+                  <span class="close"></span>
+                </div>
+                <div class="item-name-ru"><%= currencies[8][2] %></div>
+              </div>
+            </div>
+            <!-- BYN -->
+            <div
+              class="item"
+              data-cur="<%= currencies[2][0].toLowerCase() %>"
+              style="display: block"
+            >
+              <div class="item-wrapper">
+                <div class="item-info">
+                  <span><%= currencies[2][0] %></span>
+                  <input
+                    class="item-value"
+                    type="tel"
+                    inputmode="decimal"
+                    value="<%= currencies[2][1].toFixed(4) %>"
+                  />
+                  <span class="close"></span>
+                </div>
+                <div class="item-name-ru"><%= currencies[2][2] %></div>
+              </div>
+            </div>
+            <!-- RUB -->
+            <div
+              class="item"
+              data-cur="<%= currencies[18][0].toLowerCase() %>"
+              style="display: block"
+            >
+              <div class="item-wrapper">
+                <div class="item-info">
+                  <span><%= currencies[18][0] %></span>
+                  <input
+                    class="item-value"
+                    type="tel"
+                    inputmode="decimal"
+                    value="<%= currencies[18][1].toFixed(4) %>"
+                  />
+                  <span class="close"></span>
+                </div>
+                <div class="item-name-ru"><%= currencies[18][2] %></div>
+              </div>
+            </div>
+
+            <!-- FOREACH -->
+            <% currencies.forEach(currency => { %>
+            <!--  -->
+            <% if(currency[0] === "USD" || currency[0] === "EUR" || currency[0]
+            === "BYN" || currency[0] === "RUB") { %> <% return %> <% } %>
+
+            <div
+              class="item"
+              data-cur="<%= currency[0].toLowerCase() %>"
+              style="display: none"
+            >
+              <div class="item-wrapper">
+                <div class="item-info">
+                  <span><%= currency[0] %></span>
+                  <input
+                    class="item-value"
+                    type="tel"
+                    inputmode="decimal"
+                    value="<%= currency[1].toFixed(4) %>"
+                  />
+                  <span class="close"></span>
+                </div>
+                <div class="item-name-ru"><%= currency[2] %></div>
+              </div>
+            </div>
+
+            <% }) %>
+          </div>
+
+          <div class="add">
+            <div class="add-inputs">
+              <span class="menu">(+) Добавить валюту</span>
+              <div class="drop">
+                <ul class="list">
+                  <% currencies.forEach(currency => { %> <% if(currency[0] ===
+                  "USD" || currency[0] === "EUR" || currency[0] === "BYN" ||
+                  currency[0] === "RUB") { %>
+
+                  <li
+                    class="show-currency"
+                    id="<%= currency[0].toLowerCase() %>"
+                    style="display: none"
+                  >
+                    <span>
+                      <span><%= currency[0] %></span>
+                      <%= currency[2] %>
+                    </span>
+                  </li>
+
+                  <% } else { %>
+
+                  <li
+                    class="show-currency"
+                    id="<%= currency[0].toLowerCase() %>"
+                  >
+                    <span>
+                      <span><%= currency[0] %></span>
+                      <%= currency[2] %>
+                    </span>
+                  </li>
+                  <% } %> <% }) %>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- script frontend -->
+
+    <script src="../script.js"></script>
+  </body>
+</html>
