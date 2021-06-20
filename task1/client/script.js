@@ -3,54 +3,71 @@ const dropDown = document.querySelector(".drop");
 const list = document.querySelector(".list");
 const items = document.querySelector(".items");
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   /* GET DATA */
-  getData("http://localhost:3000/")
-    .then((currencyData) => {
-      [mainData, extraData] = splitData(currencyData);
-      setupUI(mainData, false, "block", "none");
-      setupUI(extraData, true, "none", "block");
+  const currencies = await getData("http://localhost:3000/");
 
-      dropDownMenu();
+  const [mainCurrencies, extraCurrencies] = splitData(currencies);
 
-      const currencyList = document.querySelectorAll(".show-currency");
-      showCurrency(currencyList);
-      removeCurrency(currencyList);
+  setupUI(mainCurrencies, false, "block", "none");
+  setupUI(extraCurrencies, true, "none", "block");
 
-      changeListener();
-    })
-    .catch((error) => console.log(error));
+  dropDownMenu();
+
+  const currencyList = document.querySelectorAll(".show-currency");
+  addCurrencyInfo(currencyList);
+  removeCurrencyInfo(currencyList);
+
+  updateCurrencies();
 });
 
-function changeListener() {
+function updateCurrencies() {
   const inputs = items.querySelectorAll(".item-value");
 
   inputs.forEach((input) => {
-    input.addEventListener("keyup", (e) => {
-      if (!e.key.match(/^[0-9\.]/g) && e.code !== "Backspace") {
-        return;
-      }
+    input.addEventListener("keyup", async (e) => {
+      const data = getNewData(e);
 
-      const rate = e.target.value;
-      const currencyName = e.target.id.slice(3).toUpperCase();
+      const calculated = await postData("http://localhost:3000/", data);
 
-      const data = {};
-      data[currencyName] = rate;
-
-      // const values = [...inputs].map((input) => input.value);
-      // console.log(values);
-
-      /* send data to server */
-      postData("http://localhost:3000/", data).then((data) => {
-        console.log(data);
-
-        e.target.value = data.result;
-      });
+      setNewCurrenciesUI(calculated, inputs);
     });
   });
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+function getNewData(e) {
+  /* check unnecessary characters */
+  if (!e.key.match(/[0-9\.]/g) && e.key !== "Backspace") {
+    e.target.value = parseFloat(e.target.value);
+    e.preventDefault();
+  }
+
+  let currencyRate = e.target.value;
+
+  /* check second "." */
+  if (
+    currencyRate.slice(0, currencyRate.length - 1).match(/\./) &&
+    e.key === "."
+  ) {
+    currencyRate = currencyRate.slice(0, currencyRate.length - 1);
+  }
+  if (currencyRate === "NaN") currencyRate = "";
+
+  const currencyName = e.target.id.slice(3).toUpperCase();
+  return { currencyName, currencyRate };
+}
+
+function setNewCurrenciesUI(calculated, inputs) {
+  inputs.forEach((input) => {
+    const [currName, calcRate] = calculated.find(
+      (item) => item[0] === input.id.slice(3).toUpperCase()
+    );
+
+    input.value = calcRate;
+  });
+}
 
 async function getData(url) {
   try {
@@ -58,7 +75,7 @@ async function getData(url) {
 
     return await response.json();
   } catch (error) {
-    throw new Error("Failed...");
+    throw new Error(error);
   }
 }
 
@@ -74,7 +91,7 @@ async function postData(url, data = {}) {
 
     return await response.json();
   } catch (error) {
-    throw new Error("Failed...");
+    throw new Error(error);
   }
 }
 
@@ -104,8 +121,8 @@ function setupUI(data, flag, itemDisplay, closeBtnDisplay) {
         <div class="item-wrapper">
           <div class="item-info">
             <span>${currency[0]}</span>
-            <input class="item-value" id ="nb_${currency[0].toLowerCase()}" type="number" inputmode="decimal"
-              value="${currency[1].toFixed(4)}"/>
+            <input class="item-value" id ="nb_${currency[0].toLowerCase()}" type="tel" inputmode="decimal"
+              value="${parseFloat(currency[1].toFixed(4))}"/>
             <span class="close" style="display: ${closeBtnDisplay}"></span>
           </div>
           <div class="item-name-ru">${currency[2]}</div>
@@ -148,7 +165,7 @@ function dropDownMenu() {
 }
 
 /* display extra currency */
-function showCurrency(currencyList) {
+function addCurrencyInfo(currencyList) {
   currencyList.forEach((curr) => {
     curr.addEventListener("click", (e) => {
       const targetElement = e.target.closest(".show-currency");
@@ -165,7 +182,7 @@ function showCurrency(currencyList) {
 }
 
 /* remove currency from UI */
-function removeCurrency(currencyList) {
+function removeCurrencyInfo(currencyList) {
   const closeBtns = document.querySelectorAll(".close");
 
   closeBtns.forEach((btn) => {
