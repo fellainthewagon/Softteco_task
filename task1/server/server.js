@@ -1,16 +1,18 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const router = require("./routes/converter");
 require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(express.static("public"));
-app.set("view engine", "ejs");
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(cors());
 
 /* router */
-app.use("/converter", router);
+app.use("/", router);
 
 /* DB CONNECTING & START SERVER */
 async function start() {

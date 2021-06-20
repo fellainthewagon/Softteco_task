@@ -152,3 +152,9 @@ li:hover {
 .close:after {
   transform: rotate(-45deg);
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
