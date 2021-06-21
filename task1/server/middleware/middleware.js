@@ -25,12 +25,10 @@ async function calculator(req, res, next) {
     const { currencyName, currencyRate } = req.body;
 
     const rate = currencies.find((item) => item[0] === currencyName)[1];
-    const coeff = currencyRate / rate;
 
     const calculated = currencies.map((item) => {
       if (item[0] === currencyName) return [currencyName, currencyRate];
-
-      item[1] = parseFloat((item[1] * coeff).toFixed(4));
+      item[1] = parseFloat(((item[1] * currencyRate) / rate).toFixed(4));
 
       return [item[0], item[1]];
     });
