@@ -1,4 +1,5 @@
 import StartLogic from "./startLogicUI/StartLogic.js";
+import UIFunctionality from "./startLogicUI/UIFunctionality.js";
 import UpdateCurrencies from "./dynamicLogic/UpdateCurrencies.js";
 
 const url = "http://localhost:3000/";
@@ -8,7 +9,7 @@ const list = document.querySelector(".list");
 const items = document.querySelector(".items");
 const date = document.querySelector(".date");
 
-const startLogic = new StartLogic(url, list, items, dropDown, container, date);
+const startLogic = new StartLogic(url, list, items, date);
 
 document.addEventListener("DOMContentLoaded", async () => {
   /* SET DATE */
@@ -22,14 +23,19 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   /* SETUP MAIN/EXTRA CARRENCIES UI */
-  const [mainCurrencies, extraCurrencies] = startLogic.splitData();
-  startLogic.setupUI(mainCurrencies, false, "block", "none");
-  startLogic.setupUI(extraCurrencies, true, "none", "block");
+  startLogic.setupUI();
 
   /* DROPDOWN MENU, REMOVE/ADD EXTRA CARRENCIES FUNCTIONALITY */
   const currencyList = document.querySelectorAll(".show-currency");
   const closeBtns = document.querySelectorAll(".close");
-  startLogic.functionalityUI(currencyList, closeBtns);
+  const uiFunctionality = new UIFunctionality(
+    items,
+    container,
+    dropDown,
+    currencyList,
+    closeBtns
+  );
+  uiFunctionality.start();
 
   /* LISTEN CHANGIES, POST REQUEST, SET TO UI UPDATED RATES  */
   const inputs = items.querySelectorAll(".item-value");

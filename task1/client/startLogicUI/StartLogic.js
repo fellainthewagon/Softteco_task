@@ -1,11 +1,10 @@
 export default class StartLogic {
-  constructor(url, list, items, dropDown, container, date) {
+  constructor(url, list, items, date) {
     this.url = url;
     this.list = list;
     this.items = items;
-    this.dropDown = dropDown;
-    this.container = container;
     this.date = date;
+    this.mainData = [];
     this.data;
     this.currencyList;
     this.closeBtns;
@@ -30,26 +29,26 @@ export default class StartLogic {
     }
   }
 
-  splitData() {
-    let mainData = [];
+  setupUI() {
     this.data.forEach((item, index) => {
       if (item[0] === "USD") {
         this.data.splice(index, 1);
-        mainData.push(item);
+        this.mainData.push(item);
       }
     });
 
     this.data.forEach((item, index) => {
       if (item[0] === "EUR" || item[0] === "BYN" || item[0] === "RUB") {
         this.data.splice(index, 1);
-        mainData.push(item);
+        this.mainData.push(item);
       }
     });
 
-    return [mainData, this.data];
+    this.fillHtml(this.mainData, false, "block", "none");
+    this.fillHtml(this.data, true, "none", "block");
   }
 
-  setupUI(data, flag, itemDisplay, closeBtnDisplay) {
+  fillHtml(data, flag, itemDisplay, closeBtnDisplay) {
     let itemsHtml = "";
     let listHtml = "";
 
@@ -82,61 +81,5 @@ export default class StartLogic {
 
     this.list.innerHTML += listHtml;
     this.items.innerHTML += itemsHtml;
-  }
-
-  functionalityUI(currencyList, closeBtns) {
-    this.currencyList = currencyList;
-    this.closeBtns = closeBtns;
-
-    this.dropDownMenu();
-    this.addCurrencyInfo();
-    this.removeCurrencyInfo();
-  }
-
-  dropDownMenu() {
-    this.container.addEventListener("click", (e) => {
-      if (
-        this.dropDown.classList.contains("active") &&
-        e.target.closest(".list") === this.list
-      ) {
-        return;
-      }
-      if (e.target.className === "menu") {
-        this.dropDown.classList.toggle("active");
-      } else {
-        this.dropDown.classList.remove("active");
-      }
-    });
-  }
-
-  addCurrencyInfo() {
-    this.currencyList.forEach((curr) => {
-      curr.addEventListener("click", (e) => {
-        const targetElement = e.target.closest(".show-currency");
-
-        const id = targetElement.id;
-        const currencyInput = [...this.items.children].find(
-          (item) => item.dataset.cur === id
-        );
-
-        currencyInput.style.display = "block";
-        targetElement.style.display = "none";
-      });
-    });
-  }
-
-  removeCurrencyInfo() {
-    this.closeBtns.forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        const targetInput = e.target.closest(".item");
-        const dataCurrency = targetInput.dataset.cur;
-        const target = [...this.currencyList].find(
-          (item) => item.id === dataCurrency
-        );
-
-        targetInput.style.display = "none";
-        target.style.display = "block";
-      });
-    });
   }
 }
