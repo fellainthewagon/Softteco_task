@@ -41,7 +41,7 @@ async function calculator(req, res, next) {
 }
 
 async function getCurrencies() {
-  return await axios
+  return axios
     .get(process.env.URI)
     .then((response) => response.data)
     .then((data) => data.rates)

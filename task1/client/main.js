@@ -15,30 +15,30 @@ document.addEventListener("DOMContentLoaded", async () => {
   /* SET DATE */
   startLogic.setDate();
 
-  /* GET DATA */
   try {
+    /* GET DATA */
     await startLogic.getData();
+
+    /* SETUP MAIN/EXTRA CARRENCIES UI */
+    startLogic.setupUI();
+
+    /* DROPDOWN MENU, REMOVE/ADD EXTRA CARRENCIES FUNCTIONALITY */
+    const currencyList = document.querySelectorAll(".show-currency");
+    const closeBtns = document.querySelectorAll(".close");
+    const uiFunctionality = new UIFunctionality(
+      items,
+      container,
+      dropDown,
+      currencyList,
+      closeBtns
+    );
+    uiFunctionality.start();
+
+    /* LISTEN CHANGIES, POST REQUEST, SET TO UI UPDATED RATES  */
+    const inputs = items.querySelectorAll(".item-value");
+    const updateCurrencies = new UpdateCurrencies(url, inputs);
+    updateCurrencies.updateListener();
   } catch (error) {
     throw new Error(error);
   }
-
-  /* SETUP MAIN/EXTRA CARRENCIES UI */
-  startLogic.setupUI();
-
-  /* DROPDOWN MENU, REMOVE/ADD EXTRA CARRENCIES FUNCTIONALITY */
-  const currencyList = document.querySelectorAll(".show-currency");
-  const closeBtns = document.querySelectorAll(".close");
-  const uiFunctionality = new UIFunctionality(
-    items,
-    container,
-    dropDown,
-    currencyList,
-    closeBtns
-  );
-  uiFunctionality.start();
-
-  /* LISTEN CHANGIES, POST REQUEST, SET TO UI UPDATED RATES  */
-  const inputs = items.querySelectorAll(".item-value");
-  const updateCurrencies = new UpdateCurrencies(url, inputs);
-  updateCurrencies.updateListener();
 });

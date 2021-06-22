@@ -8,15 +8,11 @@ export default class UpdateCurrencies {
 
   updateListener() {
     this.inputs.forEach((input) => {
-      try {
-        input.addEventListener("keyup", async (e) => {
-          this.getRateFromInput(e);
-          await this.postData();
-          this.setNewRatesUI();
-        });
-      } catch (error) {
-        throw new Error(error);
-      }
+      input.addEventListener("keyup", async (e) => {
+        this.getRateFromInput(e);
+        await this.postData();
+        this.setNewRatesUI();
+      });
     });
   }
 
@@ -44,19 +40,15 @@ export default class UpdateCurrencies {
   }
 
   async postData() {
-    try {
-      const response = await fetch(this.url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(this.data),
-      });
+    const response = await fetch(this.url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(this.data),
+    });
 
-      this.calculated = await response.json();
-    } catch (error) {
-      throw new Error(error);
-    }
+    this.calculated = await response.json();
   }
 
   setNewRatesUI() {

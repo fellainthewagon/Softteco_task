@@ -20,13 +20,9 @@ export default class StartLogic {
   }
 
   async getData() {
-    try {
-      const response = await fetch(this.url);
+    const response = await fetch(this.url);
 
-      this.data = await response.json();
-    } catch (error) {
-      throw new Error(error);
-    }
+    this.data = await response.json();
   }
 
   setupUI() {
